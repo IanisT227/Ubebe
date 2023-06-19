@@ -1,0 +1,17 @@
+.mydiv{
+height: 250px;
+width: 450px;
+background-color: aqua;
+}
+
+.mydiv:active{
+    position: relative;
+animation-name: animation;
+animation-duration: 1s;
+}
+
+@keyframes animation {
+    0%   { transform:rotate(0deg);left:0px; top:0px;}
+   /** 50%  { left:1500px; top:0px;}**/
+    100% {transform:rotate(360deg); left:1100px; top:0px;}
+  }

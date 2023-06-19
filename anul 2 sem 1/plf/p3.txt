@@ -1,0 +1,106 @@
+%Generate all permutation of N (N - given)
+% respecting the property: for every 2<=i<=n exists an 1<=j<=i,
+% so |v(i)-v(j)|=1.
+
+% inserare(l1...ln, e) =
+% 	[e], n = 0
+% 	e + l1...ln, n >= 1
+% 	l1 + inserare(l2...ln), otherwise
+
+% inserare(L:list, E:number, R:list)
+% inserare(i, i, o)
+
+inserare([], E, [E]).
+inserare([H|T], E, [E,H|T]).
+inserare([H|T], E, [H|R]) :- inserare(T, E, R).
+
+% permutari(l1...ln) =
+% 	[], n = 0
+% 	inserare(permutari(l2...ln), l1), otherwise
+
+% permutari(L:list, R:list)
+% permutari(i, o)
+
+permutari([], []).
+permutari([H|T], R) :-
+    permutari(T, RP),
+    inserare(RP, H, R).
+
+% creareLista(n) =
+%  [], n=0
+%  [n], n=1
+%  [n, n-1, n-2 .... 1], n>=2
+
+% creareLista(N:number, R:list)
+% creareLista(i, o)
+% creeaza o lista de elemente de la n la 1
+
+creareLista(0, []).
+creareLista(N, [N|R]) :-
+    N > 0,
+    NN is N - 1,
+    creareLista(NN, R).
+
+% diferenta(a, b) =
+% 	a - b, a > b
+% 	b - a, a < b
+
+% diferenta(A:number, B:number, R:number)
+% diferenta(i, i, o)
+
+diferenta(A, B, R) :-
+    A > B,
+    R is A - B.
+diferenta(A, B, R) :-
+    A =< B,
+    R is B - A.
+
+
+% verif(l1...ln, x) =
+% 	true, n = 0
+% 	true, diferenta(l1, x) = 1
+% 	verif(l2...ln, x), n > 0
+% 	false, otherwise
+
+% verif(L:list, X:number)
+% verif(i, i)
+% 
+
+verif([], _).
+verif([H|_], X) :-
+    diferenta(X, H, R),
+    R =:= 1, !.
+verif([_|T], X) :-
+    verif(T, X).
+
+%  verifPermutari(l1 ... ln, e) =
+%	true, n=0
+%	true, e is empty
+%	true, verif(l2..ln, l1) = true 
+%	verifPermutari( l2..ln, l1..e)
+%	false otherwise
+
+% verifPermutari(L:list, E:list)
+% verifPermutari(i, i)
+ 	
+verifPermutari([], _).
+verifPermutari([H|T], L) :-
+    verif(L, H),
+    verifPermutari(T, [H|L]).
+
+% solutie(L:list, R:list)
+% solutie(i, o)
+solutie(L, R) :-
+    permutari(L, R),
+    verifPermutari(R, []).
+
+
+% creeaza o lista cu numerele de la N la 1
+%  si ii atribuie lui R toate listele care respecta conditia
+% toateSolutiile(N:number, R:list)
+% toateSolutiile(i, o)
+
+toateSolutiile(N, R) :-
+    creareLista(N, RN),
+    findall(RP, solutie(RN, RP), R).
+

@@ -1,0 +1,13 @@
+.thumbnails img{
+     border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 160px;
+  height: 90px;
+
+}
+
+.thumbnails{
+    width: 100%;
+
+}

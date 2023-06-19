@@ -1,0 +1,6 @@
+rootProject.name = 'Lab11'
+include 'client'
+include 'core'
+include 'web'
+include 'lmao'
+

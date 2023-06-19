@@ -1,0 +1,10 @@
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\Ianis Teja\Desktop\Fac\anul 2 sem 2\dbms\lab1\example\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

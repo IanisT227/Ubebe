@@ -1,0 +1,31 @@
+Description:
+My idea for an app is an online cooking book.
+The user will have his own page where he could post his recipe and maybe also upload some pictures. 
+The user could save his favourite recipes and have a feed with recommended recipes. 
+In addition,if the application is to be expanded, it would also have user to user interaction via a reviews section and maybe a chat section
+
+Domain details:
+-Recipe: id, name, difficulty, time, list of ingredients, list of tags(strings and colors) and maybe pictures of the recipe ----> if expanded: reviews from other users
+-User: username(string), list of saved recipes ----> if expanded: password(string), first and last name(string), list of published recipes, a profile picture
+-Ingredients: name(string), quantity(integer/double)
+
+CRUD:
+-Create: a new user(only the name), a new recipe ( with its composing fields)
+-Read: user's saved recipes, new recipes for the user's feed
+-Update: recipes, user name, list of saved recipes
+-Delete: an own recipe, an item from the saved items list
+
+Persistence details:
+- the user name will be saved localy
+- an own recipe will also be saved on the device
+- the favourite recipes will be saved offline, so the user can access it anytime
+- publishing a recipe will need the a server call, so it could be uploaded to the global feed
+- getting the feed of recipes will also need an internet connection
+
+
+Details on what is happening when the device is offline:
+Notifications:
+	- the user could be asked to give a review to a recipe marked as "cooked or done"
+	- the user could get a reminder if a recipe is in his favourites section for too long and is not marked as "cooked" or "done"
+
+----> if expanded: -notifications could be created. For instance, if a user has subscribed to another user, and the second one posts a new recipe, the first user could get notified

@@ -1,0 +1,72 @@
+PB1
+
+write a prologue program to generate all subsets of a set with
+the property that the difference between any 2 consecutive elements is a multiple of 3.
+Subsets must have at least 2  elements.
+ex: [ 3 6 12 4 5 10 13 ]
+R: [3 6 12], [4 10 13] [6 12]
+
+
+MODEL>
+ subs (l)= {
+[], l is empty
+l1 U subs(l2...ln)
+subs(l2...ln)
+}
+
+subs( [], [])
+subs( [H|T], R):
+	subs(T, R1)
+	R = [ H | R1 ]
+subs([H|T], R):
+	subs(T, R)
+
+
+prop(l)={
+true, len(l)=1
+prop(l2...ln), if ((l1-l2)%3==0),
+false, otherwise
+}
+
+
+prop([])
+prop([H1| [H2 |T]])
+	D is abs(H1 - H2),
+	D mod 3 = 0,
+	prop([H2|T])
+
+onesol(i,o)
+
+onesol(L,R):-
+subs (L, R),
+prop(R),
+R=[_,_|_]
+
+
+all_sols(L,R):-
+	findall(X, onesol(L, X), R)
+
+
+---------------------------------------------------------------------
+PB2
+!!! we use cut only for the first solution
+
+Write a program that removes odd elems from a list
+
+rem(l1..ln)]={
+[], n=0
+rem(l2..ln), l1%2==1
+l1 U rem(l2..ln), otherwise
+}
+
+rem( L -List, R - List)
+rem(i,o)
+
+rem([],[]).
+rem([ H|T], R) :-
+	H mod 2 =:=1, !,
+	rem([T], R)
+rem([H|T], R) :-
+	H mod 2 =:= 0, (if we have ! -> cut we won't be writing this line anymore)
+	rem( [T], R2),
+	R=[H|R2].

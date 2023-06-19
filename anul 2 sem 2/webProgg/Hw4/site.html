@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Hw4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <!-- Write a javascript which displays several thumbnail images (reduced images)
+    and when the user moves the mouse over a thumbnail image, the original (bigger version) 
+    of this image will appear beneath. If the user moves the mouse over a different thumbnail,
+    the big image will change respectively.-->
+
+   
+   <div class="container" id="event">
+       <img src="images/img1.jpg" onmouseover="bigImg(this)" onmouseout="defaultImg()" id="img1">
+       <img src="images/img2.jpg" onmouseover="bigImg(this)" onmouseout="defaultImg()" id="img2">
+       <img src="images/img3.png" onmouseover="bigImg(this)" onmouseout="defaultImg()" id="img3">
+       <img src="images/img4.jpg" onmouseover="bigImg(this)" onmouseout="defaultImg()" id="img4">
+
+   </div>
+
+
+   <div class="content" id="content">
+
+   </div>
+
+</body>
+
+</html>

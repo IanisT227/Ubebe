@@ -1,0 +1,5 @@
+rootProject.name = 'attempt'
+include 'client'
+include 'core'
+include 'web'
+

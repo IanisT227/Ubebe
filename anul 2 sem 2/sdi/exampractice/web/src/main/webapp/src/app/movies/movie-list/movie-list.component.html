@@ -1,0 +1,47 @@
+<div *ngIf="selectedMovie">
+  <h2>
+    {{selectedMovie.title | uppercase}} was selected
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
+
+<h2>Movies</h2>
+<ol class="movies">
+  <li *ngFor="let movie of movies "
+      [class.selected]="movie === selectedMovie"
+      (click)="onSelect(movie)">
+    {{movie.title}}
+    {{movie.year}}
+  </li>
+</ol>
+<div class="add">
+  <form [formGroup]="addingForm" (ngSubmit)="addMovie()">
+    <label>Stock</label>
+    <input class="form-control" type="text" formControlName="stock" id="stock" name="stock"/><br>
+    <label>Title</label>
+    <input class="form-control" type="text" formControlName="title" id="title" name="title"/><br>
+    <label>Year</label>
+    <input class="form-control" type="text" formControlName="year" id="year" name="year"/><br>
+    <label>Genre</label>
+    <input class="form-control" type="text" formControlName="genre" id="genre" name="genre"/><br>
+    <input type="submit" value="Add">
+  </form>
+</div>
+<br><br>
+<div class="filtering">
+  <form [formGroup]="filteringForm" (ngSubmit)="filterMovies()">
+    <label>Title</label>
+    <input class="form-control" type="text" formControlName="titleFiltering" id="titleFiltering" name="titleFiltering"/>
+    <input type="submit" value="Filter">
+  </form>
+</div>
+<br>
+<h2>Filtered movies: </h2>
+<ol class="movies">
+  <li *ngFor="let movieFiltered of moviesFiltered"
+      [class.selected]="movieFiltered === selectedMovie"
+      (click)="onSelect(movieFiltered)">
+    {{movieFiltered.title}}
+    {{movieFiltered.year}}
+  </li>
+</ol>

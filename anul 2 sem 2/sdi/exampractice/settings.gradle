@@ -1,0 +1,4 @@
+rootProject.name = 'exampractice'
+include 'core'
+include 'web'
+

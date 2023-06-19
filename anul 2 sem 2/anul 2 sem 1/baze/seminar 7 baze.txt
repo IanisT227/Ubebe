@@ -1,0 +1,149 @@
+NUMERIC_ROUNDABORT OFF
+	-OFF: no warnings if there are any trunctations concerning precision DECIMAL(7,3)
+	-ONl warnings
+2. View restrictions:
+	Not allowed: AVG, MIN, MAX, STDEV, VAR
+	-COUNT -> COUNT_BIG
+	-SUM -> used just on non-nullable columns
+	ex: SELECT is_nullable
+	    FROM sys.columns
+	    WHERE name='COlumnName' and object_id=OBJECT_ID('TableName')
+	    SUM(ISNUL('ColumnName', 0))
+	-can't reference anothe view
+	-cannot  have subqueries in the FROM clause,HAVING, OUTER JOIN, TOP, DISTINCT, ORDER BY, SET operators (UNION, INTERSECT, EXCEPT)
+	-can't use functions which are not deterministic ( Ex: GETDATE)
+	-Names of objects must be written in a two part format: dbo.Tablename
+	-use SCHEMABINDING
+	
+
+CREATE view view_2
+WITH Schemabinding
+AS
+SELECT col1
+FROM dbo.table
+
+DROP TABLE table1 => error
+
+When creating a clustered unique index on a view, that view is getting materialized
+After this, we can create as well some non-clustered indexes
+
+SELECT * 
+FROM viewName
+WITH (NOEXPAND) -> SQL will use indexes on the view, not the underlying indexes of the tables 
+WHERE (condition)
+
+Warning -> handled in try catch if the severity is above 10.
+
+FRAGMENTATION:
+	1) internal
+		a. Records are not stored in a contiguous area of memory (there may be some unused space between)
+		b. The fullness of a page depends in time
+		c. If there is unused page -> cache is not efficiently used and there will be more pages transfers between the disk and main memory 
+	
+	2) extent
+		- Group of 8 contiguous pages
+		- Tables's extent are not contiguous stored
+	
+	3) logical
+		- Every indexed page has a reference to the next page and one to the previous one based on the key index
+		- Page-split ( ex: inserting a value) 
+		- Out of order page
+
+	
+	Sys.dm_db_index_physical_stats
+		- Avg fragmentation in percent:
+			-- heaps: extent fragmentation
+			-- indexes: logical fragmentation
+		- Avg page space used in percent:
+			-- Avg of the percentages of all the available space in all pages
+	Heap-table without a cls index, stored in no particular order
+
+
+	Reduce fragmentation:
+		- Heap:
+			-- Create a clustered index then drop it           (cls = clustered)
+			-- Creating the cl index => the records will get redistributed
+		- Indexed table:
+			-- if avg_fragmentation_in_percent >5 % and <= 30%:
+				--- Reorder the leaf pages of the index: ALTER INDEX nameindex REORGANINZE
+			-- if avg_fragmentation_in_percent <30%:
+				--- Rebuild the index
+				--- Drop and recreating the index
+
+		- when dropping and recreating the index, all the data is going to be redistributed into full data pages
+		- CREATE INDEX indexname 
+		  WITH (FILLFACTOR = 70 ) .....
+
+
+
+			T-SQL CONTROL OF FLOW LANGUAGE
+	
+	-BEGIN..END
+	-BREAK
+	....
+	....
+	-THROW
+	-TRY CATCH
+	- WAITFOR
+	- GOTO label
+
+	Label:
+	GOTO Label
+
+	RETURN {integer_expression}
+	Exists froma  a stored procedure/batch (GO separated) / statement block ( BEGIN END separated)
+	- 0 - success
+	- non- 0 - failure
+
+	WAITFOR {delay 'time_to_pass' | TIME 'time_to_execut'}
+	Ex: WAITFOR TIME '07:15'
+	    WAITFOR DELAY '3:00' (SIMILAR TO SLEEP)
+	
+	THROW [error_number, message, state]
+	ex: THROW 51000, 'message, 1;	
+	error_number >=50000
+	Message: nvarchar(2048)
+	State: 0-255
+
+	severity=16
+	RAISERROR - Specify 26 severity level
+	Severity 20-26 => fatal error & the db connection is closed
+	Severity >16 => errors are automatically logged
+	
+	RAISEERROR() WITH LOG
+	
+	TRY CATCH
+
+	BEGIN TRY
+	....
+	END TRY
+	BEGIN CATCH
+	...
+	END CATCH
+		- Handles exec errors with a severity >=10 and which do not close the db connection
+		
+
+	ERROR_NUMBER()
+	ERROR_SEVERITY()
+	ERROR_STATE()
+	ERROR_PROCEDURE() ---
+	ERROR_LINE()
+	ERROR_MESSAGE()
+
+
+
+
+
+
+
+
+
+
+
+	index recommendations:	
+		- every table should have a clustered index
+		- the cl index should be as small as possible, selective, increasing
+		- non-cl indexes on foreign keys and on columns frequently used in WHERE
+		- Covering indexes on the most frequently used queries
+		- NO: index/column
+		- Multi-column index: put first the most selective column

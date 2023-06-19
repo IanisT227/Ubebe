@@ -1,0 +1,16 @@
+.firstdiv{
+    background-image:url("hatz1.jpg");
+    background-repeat: no-repeat;
+    height: 840px;
+    width: 840px;
+    
+
+}
+
+.firstdiv:hover{
+    background-image: url("hatz2.jpg");
+    height: 840px;
+    width: 840px;
+    background-repeat: no-repeat;
+
+}

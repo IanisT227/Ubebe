@@ -1,0 +1,10 @@
+USE CarBusiness	
+Go
+
+SET TRAN ISOLATION LEVEL REPEATABLE READ
+BEGIN TRAN
+SELECT * FROM Sites					
+WAITFOR DELAY '00:00:10'
+--now we see the value before the update 
+SELECT * FROM Sites
+COMMIT TRAN

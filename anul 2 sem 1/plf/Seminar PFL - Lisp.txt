@@ -1,0 +1,27 @@
+Write a lisp function that removes all elems multiple of m (MAP Function)
+
+ex: n=3
+(1 2 3 (5 6) 7 9 ) => (1 2 (5) 7)
+
+model>
+
+remove( l, n) ={
+empty list, l is numerical atom, if l % n == 0
+{l}, l is non-numerical atom or l % n == 1
+U (i=1, n) remove(li,n), l is list
+}
+
+(defun remove (l n)
+	( ( and
+		( and (numberp l)( equal (mod / n) 0 ) ) nil )
+		((atom l) (list l))
+		( t ( list (mapcar #'( lambda (li) (remove li n)) )l )
+
+
+( defun main ( l n)
+	( car ( remove l n ) ) 
+)
+
+
+mapcar ( list ( f l1) (f l2) ... )
+mapcon(nconc ( f l1) (f l2) ... )

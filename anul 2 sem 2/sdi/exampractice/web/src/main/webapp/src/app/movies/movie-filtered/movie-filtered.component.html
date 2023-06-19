@@ -1,0 +1,28 @@
+<div class="filtering">
+  <form [formGroup]="filteringForm" (ngSubmit)="filterMovies()">
+    <label>Movie title: </label>
+    <input class="form-control" type="text" formControlName="titleFiltering" id="titleFiltering" name="titleFiltering"/>
+    <input type="submit" value="Search">
+  </form>
+</div>
+<br>
+<div *ngIf="selectedMovie">
+  <br>
+<!--  <h2>-->
+<!--    {{selectedMovie.title | uppercase}} was selected-->
+<!--  </h2>-->
+  <button (click)="gotoDetail()">View Details</button>
+  <br>
+  <br>
+</div>
+
+<h2>Filtered movies: </h2>
+<ol class="movies">
+  <li *ngFor="let movieFiltered of moviesFiltered"
+      [class.selected]="movieFiltered === selectedMovie"
+      (click)="onSelect(movieFiltered)">
+    Title: {{movieFiltered.title}}
+    <!--    {{movieFiltered.year}}-->
+  </li>
+</ol>
+

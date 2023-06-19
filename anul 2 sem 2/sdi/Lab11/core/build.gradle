@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springVersion = '5.1.5.RELEASE'
+    postgresqlVersion = '42.2.5'
+    dbcpVersion = '2.2.0'
+
+    slf4jVersion = '1.7.25'
+    log4jVersion = '2.10.0'
+
+    springDataVersion = '2.1.6.RELEASE'
+    hibernateVersion = '5.4.2.Final'
+    hikariVersion = '2.7.7'
+    jaxbapiVersion = '2.3.0'
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.4.0'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '4.4.0'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.22.0'
+
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.13.2'
+
+    implementation 'org.postgresql:postgresql:42.3.4'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    //logging
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: "$slf4jVersion"
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: "$slf4jVersion"
+
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "$log4jVersion"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "$log4jVersion"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version: "$log4jVersion"
+
+    //jpa
+    implementation group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
+    implementation group: 'org.springframework', name: 'spring-orm', version: "$springVersion"
+    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: "$springDataVersion"
+
+    implementation group: 'org.hibernate', name: 'hibernate-core', version:"$hibernateVersion"
+
+    implementation group: 'org.postgresql', name: 'postgresql', version: "$postgresqlVersion"
+
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
+
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"
+
+    // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
+    implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+}
+
+test {
+    useJUnitPlatform()
+}
